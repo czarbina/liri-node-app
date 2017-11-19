@@ -3,6 +3,7 @@ var Twitter = require('twitter');
 var twitterkeys = require("./keys.js")
 var client = new Twitter(twitterkeys);
 var Spotify = require('node-spotify-api');
+var yoursong;
 
 function getTweets() {
   var params = {screen_name: 'czarbina', count: 20};
@@ -22,7 +23,7 @@ function getSpotify() {
   secret: "33891b262db249a5bf289d4b89c94d1f"
 });
 
-spotify.search({ type: 'track', query: 'The Sign Ace of Base' }, function(err, data) {
+spotify.search({ type: 'track', query: yoursong }, function(err, data) {
   if (err) {
     return console.log('Error occurred: ' + err);
   }
@@ -68,7 +69,8 @@ inquirer.prompt ([
         name: "song"
       }
     ]).then(function(response) {
-      console.log(response.song);
+      yoursong = response.song;
+      console.log(yoursong);
       getSpotify();
     });
       break;
