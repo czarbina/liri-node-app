@@ -2,6 +2,7 @@ var inquirer = require("inquirer");
 var Twitter = require('twitter');
 var twitterkeys = require("./keys.js")
 var client = new Twitter(twitterkeys);
+var Spotify = require('node-spotify-api');
 
 function getTweets() {
   var params = {screen_name: 'czarbina', count: 20};
@@ -14,9 +15,21 @@ function getTweets() {
   });
 }
 
-// function getSpotify() {
-//
-// }
+function getSpotify() {
+  var spotify = new Spotify({
+  id: "52bf7db2252d4c238eb54ed2ce9e4f89",
+  secret: "33891b262db249a5bf289d4b89c94d1f"
+});
+
+spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+
+console.log(JSON.stringify(data, null, 2));
+});
+
+}
 //
 // function getMovie() {
 //
@@ -52,8 +65,8 @@ inquirer.prompt ([
       }
     ]).then(function(song) {
       console.log(song);
+      getSpotify();
     });
-      // getSpotify();
       break;
     //
     // case "movie-this":
