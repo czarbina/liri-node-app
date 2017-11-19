@@ -1,7 +1,6 @@
 var inquirer = require("inquirer");
 var Twitter = require('twitter');
 var twitterkeys = require("./keys.js")
-
 var client = new Twitter(twitterkeys);
 
 function getTweets() {
@@ -10,10 +9,22 @@ function getTweets() {
     if (!error) {
        // console.log(tweets);
       for (i=0; i< tweets.length;i++) {
-      console.log("This tweet :" + tweets[i].text + "Created Date: " + tweets[i].created_at);
+      console.log("Created Date: " + tweets[i].created_at + " || This tweet :" + tweets[i].text);
     }}
   });
 }
+
+// function getSpotify() {
+//
+// }
+//
+// function getMovie() {
+//
+// }
+//
+// function doIt() {
+//
+// }
 
 inquirer.prompt ([
   {
@@ -26,17 +37,27 @@ inquirer.prompt ([
   }
 ]).then(function(response) {
 
+// response.command because response is an object. We need the value IN the object.
   switch (response.command) {
     case "See my tweets":
       getTweets();
       break;
 
-    // case "spotify-this-song":
-    //   spotify();
-    //   break;
+    case "Spotify a song":
+    inquirer.prompt([
+      {
+        type: "input",
+        message: "What's the song name?",
+        name: "song"
+      }
+    ]).then(function(song) {
+      console.log(song);
+    });
+      // getSpotify();
+      break;
     //
     // case "movie-this":
-    //   movie();
+    //   getMovie();
     //   break;
     //
     // case "do-what-it-says":
@@ -45,14 +66,3 @@ inquirer.prompt ([
   }
 
 });
-
-
-
-// +++++++++++++++++++++++++++++++++++++++++++++ //
-
-
-// var command = ;
-//
-
-//
-//  // +++++++++++++++++++++++++++++++++++++++++++ //
