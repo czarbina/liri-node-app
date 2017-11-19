@@ -35,6 +35,24 @@ console.log("Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, 
 });
 
 }
+
+function getTheSign() {
+  var spotify = new Spotify({
+  id: "52bf7db2252d4c238eb54ed2ce9e4f89",
+  secret: "33891b262db249a5bf289d4b89c94d1f"
+});
+
+spotify.search({ type: 'track', query: "The Sign Ace of Base" }, function(err, data) {
+  if (err) {
+    return console.log('Error occurred: ' + err);
+  }
+
+console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2));
+console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2));
+console.log("Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2));
+console.log("Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+});
+}
 //
 // function getMovie() {
 //
@@ -69,17 +87,22 @@ inquirer.prompt ([
         name: "song"
       }
     ]).then(function(response) {
-      yoursong = response.song;
-      console.log(yoursong);
-      getSpotify();
+      if (response.song) {
+        yoursong = response.song;
+        // console.log(yoursong);
+        getSpotify();
+      }
+      else {
+        getTheSign();
+      }
     });
       break;
     //
-    // case "movie-this":
+    // case "Show me movie info":
     //   getMovie();
     //   break;
     //
-    // case "do-what-it-says":
+    // case "Do what liri says":
     //   doIt();
     //   break;
   }
