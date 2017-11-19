@@ -88,7 +88,7 @@ function getMovie() {
       });
     }
 
-// function doIt() {
+// function iWantItThatWay() {
 //
 // }
 
@@ -98,7 +98,7 @@ inquirer.prompt ([
     message: "What would you like to do?",
     choices: ["See my tweets", new inquirer.Separator(), "Spotify a song",
     new inquirer.Separator(), "Show me movie info", new inquirer.Separator(),
-  "Do what liri says"],
+  "Yes I know it's too late, but..."],
     name: "command"
   }
 ]).then(function(response) {
@@ -147,8 +147,8 @@ inquirer.prompt ([
       });
         break;
     //
-    // case "Do what liri says":
-    //   doIt();
+    // case "Yes I know it's too late, but...:
+    //   iWantItThatWay();
     //   break;
   }
 
