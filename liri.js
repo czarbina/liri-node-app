@@ -30,29 +30,32 @@ spotify.search({ type: 'track', query: yoursong }, function(err, data) {
   if (err) {
     return console.log('Error occurred: ' + err);
   }
-  console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
+  console.log("Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
   + "\n" + "Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2)
-  + "\n" + "Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
+  + "\n" + "Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
   + "\n" + "Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
 });
 
 }
 
 function getTheSign() {
-  var spotify = new Spotify({
-  id: "52bf7db2252d4c238eb54ed2ce9e4f89",
-  secret: "33891b262db249a5bf289d4b89c94d1f"
-});
-
-spotify.search({ type: 'track', query: "The Sign Ace of Base" }, function(err, data) {
-  if (err) {
-    return console.log('Error occurred: ' + err);
-  }
-  console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
-  + "\n" + "Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2)
-  + "\n" + "Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
-  + "\n" + "Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
-});
+  yoursong = "Ace of Base the sign";
+  // console.log(yoursong);
+  getSpotify();
+//   var spotify = new Spotify({
+//   id: "52bf7db2252d4c238eb54ed2ce9e4f89",
+//   secret: "33891b262db249a5bf289d4b89c94d1f"
+// });
+//
+// spotify.search({ type: 'track', query: "The Sign Ace of Base" }, function(err, data) {
+//   if (err) {
+//     return console.log('Error occurred: ' + err);
+//   }
+//   console.log("Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
+//   + "\n" + "Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2)
+//   + "\n" + "Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
+//   + "\n" + "Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+// });
 }
 
 function getMovie() {
@@ -73,20 +76,22 @@ function getMovie() {
   }
 
   function getMrNobody() {
-    var queryUrl = "http://www.omdbapi.com/?t=" + "Mr+Nobody" + "&y=&plot=short&apikey=trilogy";
-    request(queryUrl, function(error, response, body) {
-      if (!error && response.statusCode === 200) {
-        console.log(
-          "Title: " + JSON.parse(body).Title + "\n" +
-          "Year: " + JSON.parse(body).Year + "\n" +
-          "IMDB Rating: " + JSON.parse(body).imdbRating + "\n" +
-          "Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n" +
-          "Country: " + JSON.parse(body).Country + "\n" +
-          "Language: " + JSON.parse(body).Language + "\n" +
-          "Plot: " + JSON.parse(body).Plot + "\n" +
-          "Actors: " + JSON.parse(body).Actors);
-        }
-      });
+    yourmovie = "Mr Nobody";
+    getMovie();
+    // var queryUrl = "http://www.omdbapi.com/?t=" + "Mr+Nobody" + "&y=&plot=short&apikey=trilogy";
+    // request(queryUrl, function(error, response, body) {
+    //   if (!error && response.statusCode === 200) {
+    //     console.log(
+    //       "Title: " + JSON.parse(body).Title + "\n" +
+    //       "Year: " + JSON.parse(body).Year + "\n" +
+    //       "IMDB Rating: " + JSON.parse(body).imdbRating + "\n" +
+    //       "Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n" +
+    //       "Country: " + JSON.parse(body).Country + "\n" +
+    //       "Language: " + JSON.parse(body).Language + "\n" +
+    //       "Plot: " + JSON.parse(body).Plot + "\n" +
+    //       "Actors: " + JSON.parse(body).Actors);
+    //     }
+    //   });
     }
 
 function iWantItThatWay() {
