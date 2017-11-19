@@ -94,8 +94,13 @@ function iWantItThatWay() {
     if (error) {
       return console.log(error);
       }
-    console.log(data);
-    });
+    // console.log(data);
+    var dataArray = data.split(",");
+    // console.log(dataArray[1]);
+    yoursong = dataArray[1];
+    // console.log(yoursong);
+    getSpotify();
+  });
   }
 
 inquirer.prompt ([
