@@ -4,6 +4,8 @@ var twitterkeys = require("./keys.js")
 var client = new Twitter(twitterkeys);
 var Spotify = require('node-spotify-api');
 var yoursong;
+var request = require("request");
+var yourmovie;
 
 function getTweets() {
   var params = {screen_name: 'czarbina', count: 20};
@@ -45,18 +47,47 @@ spotify.search({ type: 'track', query: "The Sign Ace of Base" }, function(err, d
   if (err) {
     return console.log('Error occurred: ' + err);
   }
-
-console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2));
-console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2));
-console.log("Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2));
-console.log("Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+  console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
+  + "\n" + "Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2)
+  + "\n" + "Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
+  + "\n" + "Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
 });
 }
-//
-// function getMovie() {
-//
-// }
-//
+
+function getMovie() {
+  var queryUrl = "http://www.omdbapi.com/?t=" + yourmovie + "&y=&plot=short&apikey=trilogy";
+  request(queryUrl, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      console.log(
+        "Title: " + JSON.parse(body).Title + "\n" +
+        "Year: " + JSON.parse(body).Year + "\n" +
+        "IMDB Rating: " + JSON.parse(body).imdbRating + "\n" +
+        "Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n" +
+        "Country: " + JSON.parse(body).Country + "\n" +
+        "Language: " + JSON.parse(body).Language + "\n" +
+        "Plot: " + JSON.parse(body).Plot + "\n" +
+        "Actors: " + JSON.parse(body).Actors);
+      }
+    });
+  }
+
+  function getMrNobody() {
+    var queryUrl = "http://www.omdbapi.com/?t=" + "Mr+Nobody" + "&y=&plot=short&apikey=trilogy";
+    request(queryUrl, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        console.log(
+          "Title: " + JSON.parse(body).Title + "\n" +
+          "Year: " + JSON.parse(body).Year + "\n" +
+          "IMDB Rating: " + JSON.parse(body).imdbRating + "\n" +
+          "Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\n" +
+          "Country: " + JSON.parse(body).Country + "\n" +
+          "Language: " + JSON.parse(body).Language + "\n" +
+          "Plot: " + JSON.parse(body).Plot + "\n" +
+          "Actors: " + JSON.parse(body).Actors);
+        }
+      });
+    }
+
 // function doIt() {
 //
 // }
@@ -96,10 +127,25 @@ inquirer.prompt ([
       }
     });
       break;
-    //
-    // case "Show me movie info":
-    //   getMovie();
-    //   break;
+
+    case "Show me movie info":
+      inquirer.prompt([
+        {
+          type: "input",
+          message: "What movie intrigues you?",
+          name: "movie"
+        }
+      ]).then(function(response) {
+        if (response.movie) {
+          yourmovie = response.movie;
+          // console.log(yoursong);
+          getMovie();
+        }
+        else {
+          getMrNobody();
+        }
+      });
+        break;
     //
     // case "Do what liri says":
     //   doIt();
