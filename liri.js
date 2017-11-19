@@ -11,7 +11,7 @@ function getTweets() {
     if (!error) {
        // console.log(tweets);
       for (i=0; i< tweets.length;i++) {
-      console.log("Created Date: " + tweets[i].created_at + " || This tweet :" + tweets[i].text);
+      console.log("Created Date: " + tweets[i].created_at + "\n" + "Tweet: " + tweets[i].text + "\n");
 
     }}
   });
@@ -27,11 +27,10 @@ spotify.search({ type: 'track', query: yoursong }, function(err, data) {
   if (err) {
     return console.log('Error occurred: ' + err);
   }
-
-console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2));
-console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2));
-console.log("Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2));
-console.log("Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
+  console.log("Arist: " + JSON.stringify(data.tracks.items[0].album.artists[0].name, null, 2)
+  + "\n" + "Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2)
+  + "\n" + "Song name: " + JSON.stringify(data.tracks.items[0].name, null, 2)
+  + "\n" + "Preview link: " + JSON.stringify(data.tracks.items[0].preview_url, null, 2));
 });
 
 }
