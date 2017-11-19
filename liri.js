@@ -1,11 +1,12 @@
 var inquirer = require("inquirer");
 var Twitter = require('twitter');
-var twitterkeys = require("./keys.js")
-var client = new Twitter(twitterkeys);
+var keys = require("./keys.js")
+var client = new Twitter(keys)
 var Spotify = require('node-spotify-api');
 var yoursong;
 var request = require("request");
 var yourmovie;
+var fs = require("fs");
 
 function getTweets() {
   var params = {screen_name: 'czarbina', count: 20};
@@ -88,9 +89,14 @@ function getMovie() {
       });
     }
 
-// function iWantItThatWay() {
-//
-// }
+function iWantItThatWay() {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    if (error) {
+      return console.log(error);
+      }
+    console.log(data);
+    });
+  }
 
 inquirer.prompt ([
   {
@@ -146,10 +152,9 @@ inquirer.prompt ([
         }
       });
         break;
-    //
-    // case "Yes I know it's too late, but...:
-    //   iWantItThatWay();
-    //   break;
-  }
 
-});
+    case "Yes I know it's too late, but...":
+      iWantItThatWay();
+      break;
+    }
+  });
